@@ -59,21 +59,81 @@ public class DominoTile
         return areEqual;
     }
 
+	public char[][] createDomino(int left , int right)
+	{
+		char [][] domino = new char[3][3];
+		
+		if(right != 1)
+		{
+			if(right >= 2)
+			{
+				domino[0][0] = '*';
+				domino[2][2] = '*';
+			}
+			
+			if(right >= 4 )
+			{
+				domino[0][2] = '*';
+				domino[2][0] = '*';
+			}
+			
+			if(right == 6)
+			{
+				domino[1][0] = '*';
+				domino[1][2] = '*';
+			}
+		}
+		
+		if(left != 1)
+		{
+			if(left >= 2)
+			{
+				domino[0][0] = '*';
+				domino[2][2] = '*';
+			}
+			
+			if(left >= 4 )
+			{
+				domino[0][2] = '*';
+				domino[2][0] = '*';
+			}
+			
+			if(left == 6)
+			{
+				domino[1][0] = '*';
+				domino[1][2] = '*';
+			}
+		}
+		
+		if(!(left % 2 == 0))
+		{
+			domino[1][1] = '*';
+		}
+		
+		if(!(right % 2 == 0))
+		{
+			domino[1][1] = '*';
+		}
+		
+		return domino;
+	}
 	
 	public String toString()
 	{
-		char decimalCharArray [][] = new char[3][6];
+		char decimalCharArray [][] = createDomino(left , right);
+		String printDomino = "";
 		
 		for(int row = 0;row < decimalCharArray.length;row ++)
 		{
 			for(int column = 0;column < decimalCharArray.length;column ++)
 			{
-				
-				
-				
+					printDomino += decimalCharArray[row][column];	
 			}
+			
+			printDomino += "\n";
 		}
 		
+		return printDomino;
 	}
 
 }
