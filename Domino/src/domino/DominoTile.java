@@ -2,6 +2,8 @@ package domino;
 
 public class DominoTile 
 {
+	public final int LEFT = 0;
+	public final int RIGHT = 1;
 	
 	private int left;
 	private int right;
@@ -58,6 +60,41 @@ public class DominoTile
         
         return areEqual;
     }
+	
+	public boolean isPossible(DominoTile tile , int side)
+	{
+		if(tile != null)
+		{
+			if(side == RIGHT)
+			{
+				if(this.right == tile.getLeft())
+				{
+					return true;
+				}
+				
+				else if(this.right == tile.getRight())
+				{
+					tile.swap();
+					return true;
+				}
+			}
+			
+			else if (side == LEFT)
+			{
+				if(this.left == tile.getRight())
+				{
+					return true;
+				}
+				else if(this.left == tile.getLeft())
+				{
+					tile.swap();
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
 
 	public char[][] createDomino(int left , int right)
 	{
