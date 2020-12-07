@@ -7,11 +7,32 @@ public class DominoTable {
 		private int index = 0;
 		final static int LEFT = 0;
 		final static int RIGHT = 1;
+		private TableEventListener listener;
+		
+		public void addTableEventListener(TableEventListener listener)
+		{
+			if(listener != null)
+			{
+				this.listener = listener;
+			}
+		}
+		
+		public void onChange()
+		{
+			if(listener != null)
+			{
+				listener.onTableChanged(this);
+			}
+		}
 		
 		public DominoTable()
 		{
 			dominos = new DominoTile [ARR_LENGHT];
-			
+		}
+		
+		public DominoTile[] getDominoTile()
+		{
+			return this.dominos;
 		}
 		
 		public boolean addLeft(DominoTile tile)
@@ -30,6 +51,7 @@ public class DominoTable {
 				
 				tile = dominos[0];
 				index ++;
+				onChange();
 				return true;
 			}
 			
@@ -49,6 +71,7 @@ public class DominoTable {
 				
 				dominos[0] = tile;
 				index ++;
+				onChange();
 				return true;
 			}
 			
