@@ -62,7 +62,7 @@ public class DominoTableView extends JComponent
 		for(int i = 0; i < tile.length; i++)
 		{
 			rectangle.x = (i * (rectangle.width + 10));
-			//paintDomino(rectangle,tile, graphics);
+			paintDomino(rectangle,tile[i], graphics);
 		}
 	}
 	
