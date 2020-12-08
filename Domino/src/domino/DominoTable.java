@@ -3,7 +3,7 @@ package domino;
 public class DominoTable {
 		public final int ARR_LENGHT = 28;
 		
-		private DominoTile [] dominos;
+		private DominoTile[] dominos;
 		private int index = 0;
 		final static int LEFT = 0;
 		final static int RIGHT = 1;
