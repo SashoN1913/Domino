@@ -1,15 +1,17 @@
 package domino;
 
+import java.util.ArrayList;
+
 public class DominoPlayer 
 {
 	private String nickname;
-	private DominoTile[] tiles;
+	private ArrayList<DominoTile> tiles;
 	private int tilesInHands;
 	private DominoTable table;
 	
 	public void setNickname(String nickname)
 	{
-		if(nickname.isEmpty() && nickname != null)
+		if(!(nickname.isEmpty()) && !(nickname.equals(null)))
 		this.nickname = nickname;
 	}
 	
@@ -18,12 +20,12 @@ public class DominoPlayer
 		return this.nickname;
 	}
 	
-	public DominoTile[] getDominoTile()
+	public ArrayList<DominoTile> getDominoTile()
 	{
 		return this.tiles;
 	}
 	
-	public void setDominoTile(DominoTile[] tiles)
+	public void setDominoTile(ArrayList<DominoTile> tiles)
 	{
 		this.tiles = tiles;
 	}
@@ -48,37 +50,16 @@ public class DominoPlayer
 		this.table = table;
 	}
 	
-	private int getTileIndex(DominoTile t)
-	{
-		for(int i = 0;i < tiles.length;i ++)
-		{
-			if(tiles[i] == null)
-			{
-				continue;
-			}
-			if(tiles[i] == t)
-			{
-				return i;
-			}
-		}
-		return -1;
-	}
 	
 	public void addTileAtLeft(DominoTile t)
 	{
-		if(getTileIndex(t) >= 0 && table.addLeft(t))
-		{
-			tiles[getTileIndex(t)] = null;
-			this.tilesInHands--;
-		}
+		table.addLeft(t);
+		tiles.remove(t);
 	}
 	
 	public void addTileAtRight(DominoTile t)
 	{
-		if(getTileIndex(t) >= 0 && table.addRight(t))
-		{
-			tiles[getTileIndex(t)] = null;
-			this.tilesInHands--;
-		}
+		table.addRight(t);
+		tiles.remove(t);
 	}
 }

@@ -1,9 +1,11 @@
 package domino;
 
+import java.util.Iterator;
+
 public class DominoTable {
 		public final int ARR_LENGHT = 28;
 		
-		private DominoTile[] dominos;
+		private Deck<DominoTile> dominos;
 		private int index = 0;
 		final static int LEFT = 0;
 		final static int RIGHT = 1;
@@ -27,10 +29,10 @@ public class DominoTable {
 		
 		public DominoTable()
 		{
-			dominos = new DominoTile [ARR_LENGHT];
+			dominos = new Deck<>();
 		}
 		
-		public DominoTile[] getDominoTile()
+		public Deck<DominoTile> getDominoTile()
 		{
 			return this.dominos;
 		}
@@ -42,15 +44,15 @@ public class DominoTable {
 				return false;
 			}
 			
-			if(tile.isPossible(dominos[0], LEFT) == true)
+			if(dominos.isEmpty())
 			{
-				for(int i = index + 1;i > 0 ;i --)
-				{
-					dominos[i - 1] = dominos[i];
-				}
-				
-				tile = dominos[0];
-				index ++;
+				dominos.addLeft(tile);
+				return true;
+			}
+			
+			else if(dominos.getLeft().isPossible(tile, LEFT) == true)
+			{
+				dominos.addLeft(tile);
 				onChange();
 				return true;
 			}
@@ -65,12 +67,15 @@ public class DominoTable {
 				return false;
 			}
 			
-			if(tile.isPossible(dominos[0], RIGHT) == true)
+			if(dominos.isEmpty())
 			{
-				tile = dominos[index + 1] ;
-				
-				dominos[0] = tile;
-				index ++;
+				dominos.addRight(tile);
+				return true;
+			}
+			
+			else if(dominos.getRight().isPossible(tile, RIGHT) == true)
+			{
+				dominos.addRight(tile);
 				onChange();
 				return true;
 			}
@@ -80,17 +85,13 @@ public class DominoTable {
 		
 		public void print()
 		{
-			for(int i = 0;i < ARR_LENGHT;i ++)
+			Iterator<DominoTile> it = dominos.getIterator();
+			
+			while(it.hasNext())
 			{
-				if(!(dominos[i] == null))
-				{
-					System.out.println(dominos[i].toString());
-				}
-				
-				else
-				{
-					break;
-				}
+				DominoTile t = it.next();
+				System.out.print(t.toString());
 			}
+			
 		}
 }

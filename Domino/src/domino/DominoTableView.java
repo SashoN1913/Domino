@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Double;
+import java.util.Iterator;
 
 import javax.swing.JComponent;
 
@@ -37,7 +38,7 @@ public class DominoTableView extends JComponent
 	
 	private void paintDomino(Rectangle rect, DominoTile tile, Graphics graphics)
 	{
-		graphics.setColor(Color.orange); //orange because if is white cant see it
+		graphics.setColor(Color.white); //orange because if is white cant see it
 		Rectangle rect1 = new Rectangle(rect.x , rect.y , rect.width / 2 , rect.height);
 		graphics.drawRect(rect1.x, rect1.y, rect1.width, rect1.height);
 		paintDominoDots(rect1, tile , graphics);
@@ -57,13 +58,8 @@ public class DominoTableView extends JComponent
 	{
 		super.paintComponent(graphics);
 		Rectangle rectangle = new Rectangle(0, 0, 100, 100);
-		DominoTile[] tile = table.getDominoTile();
-		
-		for(int i = 0; i < tile.length; i++)
-		{
-			rectangle.x = (i * (rectangle.width + 10));
-			paintDomino(rectangle,tile[i], graphics);
-		}
+		Deck<DominoTile> tile = table.getDominoTile();
+		//needs to be finished
 	}
 	
 	

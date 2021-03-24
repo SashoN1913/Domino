@@ -1,6 +1,9 @@
 package domino;
 
+import java.awt.BorderLayout;
 import java.util.Scanner;
+
+import javax.swing.JFrame;
 
 public class Test {
 
@@ -24,13 +27,24 @@ public class Test {
 		DominoTile tile2 = new DominoTile(5, 2);
 		DominoTile tile3 = new DominoTile(2, 4);
 		
-		table.addLeft(tile1);
-		table.addLeft(tile2);
+		//table.addLeft(tile1);
+	//	table.addLeft(tile2);
 		table.addRight(tile3);
 		
 		table.print();
 		
+		/*
+		JFrame f = new JFrame();
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setBounds(50, 50, 800, 500);
+		f.setLayout(new BorderLayout());
 		
+		DominoTableView d = new DominoTableView(table);
+
+		f.add(d, BorderLayout.CENTER);
+		f.setVisible(true);
+		//d.paintComponents(g);
+		*/
 	}
 
 }
