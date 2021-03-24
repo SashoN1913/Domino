@@ -9,7 +9,7 @@ public class Test {
 
 	public static void main(String[] args) 
 	{
-		
+		/*
 		Scanner scan = new Scanner(System.in);
 		
 		int left = scan.nextInt();
@@ -27,13 +27,15 @@ public class Test {
 		DominoTile tile2 = new DominoTile(5, 2);
 		DominoTile tile3 = new DominoTile(2, 4);
 		
-		//table.addLeft(tile1);
-	//	table.addLeft(tile2);
+		table.addLeft(tile1);
+		table.addLeft(tile2);
 		table.addRight(tile3);
 		
 		table.print();
-		
-		/*
+		*/
+		DominoTable table = new DominoTable();
+		DominoTile tile1 = new DominoTile(2, 2);
+		table.addLeft(tile1);
 		JFrame f = new JFrame();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setBounds(50, 50, 800, 500);
@@ -44,7 +46,7 @@ public class Test {
 		f.add(d, BorderLayout.CENTER);
 		f.setVisible(true);
 		//d.paintComponents(g);
-		*/
+		
 	}
 
 }

@@ -17,6 +17,18 @@ public class DominoTableView extends JComponent
 	public DominoTableView(DominoTable table)
 	{
 		this.table = table;
+		table.addTableEventListener(new TableEventListener() 
+		{
+
+			@Override
+			public void onTableChanged(DominoTable dominoTable) 
+			{
+				DominoTableView.this.repaint();
+			}
+			
+		})
+		
+		;
 	}
 	
 	private void paintDominoDots(Rectangle rect, DominoTile tile, Graphics graphics)
@@ -24,22 +36,28 @@ public class DominoTableView extends JComponent
 		char[][] pointsAtDomino = tile.createDomino(rect.x, rect.y);
 		graphics.setColor(Color.black);
 		//Rectangle rect1 = new Rectangle(rect.x, rect.y);
+		int x = rect.x + 5;
+		int y = rect.y + 5;
 		for(int i = 0; i < pointsAtDomino.length; i++)
 		{
-			for(int j = 0; i < pointsAtDomino[i].length; j++)
+			for(int j = 0; j < pointsAtDomino[i].length; j++)
 			{
 				if(pointsAtDomino[i][j] == '*')
 				{
-					graphics.fillOval(rect.x, rect.y, 10, 10);
+					graphics.fillOval(x, y, 10, 10);
 				}
+				x += 25;
 			}
+			
+			x += rect.x + 5;
+			y += 25;
 		}
 	}
 	
 	private void paintDomino(Rectangle rect, DominoTile tile, Graphics graphics)
 	{
-		graphics.setColor(Color.white); //orange because if is white cant see it
-		Rectangle rect1 = new Rectangle(rect.x , rect.y , rect.width / 2 , rect.height);
+		graphics.setColor(Color.black); 
+		Rectangle rect1 = new Rectangle(rect.x , rect.y , rect.width / 4 , rect.height / 2);
 		graphics.drawRect(rect1.x, rect1.y, rect1.width, rect1.height);
 		paintDominoDots(rect1, tile , graphics);
 		//Graphics2D g = (Graphics2D) graphics;
@@ -48,18 +66,20 @@ public class DominoTableView extends JComponent
 		//domino.fillRect(15, 15, 10, 10);
 	}
 	
-	private void paintDot(int x, int y, Graphics graphics)
-	{
-		graphics.fillOval(x, y, 15, 15);
-	}
 	
 	@Override
 	public void paintComponent(Graphics graphics)
 	{
-		super.paintComponent(graphics);
-		Rectangle rectangle = new Rectangle(0, 0, 100, 100);
-		Deck<DominoTile> tile = table.getDominoTile();
-		//needs to be finished
+		Graphics2D g = (Graphics2D)graphics.create();
+		g.setColor(Color.lightGray);
+		Rectangle rect = new Rectangle(0, 0, 500, 500);
+		g.fill(rect);
+		Iterator<DominoTile> it = table.getDominoTile().getIterator();
+		while(it.hasNext())
+		{
+			paintDomino(rect, it.next(), g);
+			paintDominoDots(rect, it.next(), g);
+		}
 	}
 	
 	
